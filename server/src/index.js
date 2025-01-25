@@ -13,9 +13,11 @@ app.use(cookieParser());
 
 // Importing the Routes
 import authRoutes from "./routes/auth.route.js";
+import messageRoutes from "./routes/message.route.js";
 
 // Routing the requests
 app.use("/api/auth", authRoutes);
+app.use("/api/message", messageRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running at: ${PORT}`);
