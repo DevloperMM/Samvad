@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { authProtect } from "../middleware/auth.middleware";
+import { authProtect } from "../middleware/auth.middleware.js";
 import {
   getMessages,
   getUsersForSidebar,
   sendMessage,
-} from "../controllers/message.controller";
+} from "../controllers/message.controller.js";
 
 const router = Router();
 
