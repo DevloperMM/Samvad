@@ -10,6 +10,7 @@ import {
 } from "./pages";
 import { useAuthStore } from "./store/useAuthStore.js";
 import { Loader } from "lucide-react";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const { checkAuth, authUser, isCheckingAuth } = useAuthStore();
@@ -18,7 +19,6 @@ function App() {
     checkAuth();
   }, [checkAuth]);
 
-  console.log(authUser);
   if (isCheckingAuth && !authUser) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -41,7 +41,7 @@ function App() {
           element={!authUser ? <SignupPage /> : <Navigate to="/" />}
         />
         <Route
-          path="login"
+          path="/login"
           element={!authUser ? <LoginPage /> : <Navigate to="/" />}
         />
         <Route path="/settings" element={<SettingsPage />} />
@@ -50,6 +50,8 @@ function App() {
           element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
         />
       </Routes>
+
+      <Toaster />
     </div>
   );
 }

@@ -6,8 +6,13 @@ import cloudinary from "../lib/cloudinary.js";
 export const signup = asyncHandler(async (req, res) => {
   const { fullName, email, password, isMale } = req.body;
   try {
-    if (!(fullName && email && password)) {
+    if (!(fullName.trim() && email.trim() && password.trim())) {
       throw new ApiError(400, "All fields are required");
+    }
+
+    const mailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!mailRegex.test(email)) {
+      throw new ApiError(400, "Email address must be valid");
     }
 
     if (password.length < 6) {
@@ -59,7 +64,7 @@ export const login = asyncHandler(async (req, res) => {
 
 export const logout = asyncHandler(async (req, res) => {
   res.cookie("token", "", { maxAge: 0 });
-  return res.status(200).json({ msg: "User logged out" });
+  return res.status(200).json({ msg: "Logout successful" });
 });
 
 export const updatePic = asyncHandler(async (req, res) => {
