@@ -18,7 +18,7 @@ function Navbar() {
               <div className="size-9 rounded-lg bg-primary/10 flex items-center justify-center">
                 <MessageSquare className="size-5 text-primary" />
               </div>
-              <div className="text-lg font-bold">Chit Chat</div>
+              <div className="text-lg font-bold">Samvad</div>
             </Link>
           </div>
 
@@ -36,11 +36,11 @@ function Navbar() {
                 </Link>
 
                 <button
-                  className="flex gap-2 items-centerx cursor-pointer"
+                  className="flex gap-2 items-center cursor-pointer"
                   onClick={logout}
                 >
                   <LogOut className="size-5" />
-                  <span className="hidden sm:inline">Logout</span>
+                  <span className="hidden sm:inline font-semibold">Logout</span>
                 </button>
               </>
             )}

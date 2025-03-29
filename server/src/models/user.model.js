@@ -27,15 +27,6 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-userSchema.pre("save", function (next) {
-  if (!this.profilePic) {
-    this.profilePic = this.isMale
-      ? "https://res.cloudinary.com/media-node/image/upload/v1737813046/c7vlcexcokxmz510lyba.jpg"
-      : "https://res.cloudinary.com/media-node/image/upload/v1737813103/lt8nxw1pgp4f5mvxpu5x.jpg";
-  }
-  next();
-});
-
 const User = mongoose.model("User", userSchema);
 
 export default User;

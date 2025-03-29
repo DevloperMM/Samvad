@@ -8,23 +8,33 @@ import {
   Mail,
   MessageSquare,
   User,
+  Users,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore.js";
 import AuthImagePattern from "../components/AuthImagePattern.jsx";
 
+// TODO: Profile photo can be added while signing up
+
 function SignupPage() {
+  const [error, setError] = useState(false);
   const [showPass, setShowPass] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     password: "",
+    isMale: null,
   });
 
   const { signup, isSigningUp } = useAuthStore();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (formData.isMale === null) {
+      setError(true);
+      return;
+    }
+    setError(false);
     signup(formData);
   };
 
@@ -67,6 +77,7 @@ function SignupPage() {
                 />
               </div>
             </div>
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-medium pb-1.5">Email</span>
@@ -86,6 +97,7 @@ function SignupPage() {
                 />
               </div>
             </div>
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-medium pb-1.5">Password</span>
@@ -105,7 +117,7 @@ function SignupPage() {
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center
+                  className="absolute inset-y-0 right-0 px-4 flex items-center
                   hover:text-base-content/50"
                   onClick={() => setShowPass(!showPass)}
                 >
@@ -117,6 +129,38 @@ function SignupPage() {
                 </button>
               </div>
             </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-medium pb-1.5">Gender</span>
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Users className="size-5 z-10 text-base-content/40" />
+                </div>
+                <select
+                  className="select w-full pl-10"
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      isMale: e.target.value === "Male",
+                    })
+                  }
+                >
+                  <option value="" className="text-base-content/60">
+                    Select Gender
+                  </option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+              {error && (
+                <p className="text-red-500 text-sm mt-1">
+                  Please select your gender
+                </p>
+              )}
+            </div>
+
             <button
               type="submit"
               className="btn btn-primary w-full"

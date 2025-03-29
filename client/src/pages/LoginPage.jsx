@@ -81,7 +81,7 @@ function LoginPage() {
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center hover:text-base-content/50"
+                  className="absolute inset-y-0 right-0 px-4 flex items-center hover:text-base-content/50"
                   onClick={() => setShowPass(!showPass)}
                 >
                   {showPass ? (
@@ -99,7 +99,7 @@ function LoginPage() {
             >
               {isLoggingIn ? (
                 <>
-                  <Loader2 className="h-5 w-5 animate-spin" />
+                  <Loader2 className="size-5 animate-spin" />
                   Loading...
                 </>
               ) : (
