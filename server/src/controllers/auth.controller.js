@@ -75,7 +75,7 @@ export const updatePic = asyncHandler(async (req, res) => {
     if (!profilePic) throw new ApiError(400, "Profile Pic is required");
 
     const uploadRes = await cloudinary.uploader.upload(profilePic, {
-      folder: process.env.CLOUDINARY_PROJECT,
+      folder: `${process.env.CLOUDINARY_PROJECT}/Avatars`,
     });
 
     const updatedUser = await User.findByIdAndUpdate(

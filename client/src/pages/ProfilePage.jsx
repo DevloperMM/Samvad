@@ -3,13 +3,12 @@ import { useAuthStore } from "../store/useAuthStore.js";
 import { Camera, Mail, User } from "lucide-react";
 
 // TODO: Profile can be updated by profile photo and name with save button
-// TODO: Avatars and Message photos keep separate in cloudinary
 
 function ProfilePage() {
-  const [selectedImg, setSelectedImg] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
   const { authUser, isUpdatingProfile, updateProfile } = useAuthStore();
 
-  const handleImgUpload = async (e) => {
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
@@ -17,7 +16,7 @@ function ProfilePage() {
     reader.readAsDataURL(file);
     reader.onload = async () => {
       const base64Img = reader.result;
-      setSelectedImg(base64Img);
+      setSelectedImage(base64Img);
       await updateProfile({ profilePic: base64Img });
     };
   };
@@ -36,9 +35,9 @@ function ProfilePage() {
             <div className="relative">
               <img
                 src={
-                  authUser.isMale
-                    ? selectedImg || authUser.profilePic || "./maleAvatar.jpg"
-                    : selectedImg || authUser.profilePic || "./femaleAvatar.jpg"
+                  selectedImage ||
+                  authUser.profilePic ||
+                  (authUser.isMale ? "./maleAvatar.jpg" : "./femaleAvatar.jpg")
                 }
                 alt="Profile"
                 className="size-32 rounded-full object-cover border-4 "
@@ -55,7 +54,7 @@ function ProfilePage() {
                   id="avatar-upload"
                   className="hidden"
                   accept="image/*"
-                  onChange={handleImgUpload}
+                  onChange={handleImageUpload}
                   disabled={isUpdatingProfile}
                 />
               </label>

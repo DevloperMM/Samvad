@@ -43,7 +43,10 @@ export const sendMessage = asyncHandler(async (req, res) => {
     let imageUrl;
     if (image) {
       // Upload base64 image to cloud
-      const uploadRes = await cloudinary.uploader.upload(image);
+      const uploadRes = await cloudinary.uploader.upload(image, {
+        folder: `${process.env.CLOUDINARY_PROJECT}/Messages`,
+        resource_type: "auto",
+      });
       imageUrl = uploadRes.secure_url;
     }
 
@@ -54,7 +57,7 @@ export const sendMessage = asyncHandler(async (req, res) => {
       image: imageUrl,
     });
 
-    // todo: realtime functionality goes here => socket.io
+    // TODO: Realtime functionality goes here => socket.io
 
     return res.status(200).json(newMessage);
   } catch (err) {

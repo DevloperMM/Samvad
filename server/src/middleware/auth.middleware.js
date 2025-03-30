@@ -19,3 +19,5 @@ export const authProtect = asyncHandler(async (req, res, next) => {
     throw new ApiError(err?.code, err?.message);
   }
 });
+
+// TODO: Add Forgot password and email verification

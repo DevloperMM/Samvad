@@ -5,10 +5,10 @@ import toast from "react-hot-toast";
 export const useAuthStore = create((set) => ({
   authUser: null,
   isCheckingAuth: true,
-
   isSigningUp: false,
   isLoggingIn: false,
   isUpdatingProfile: false,
+  onlineUsers: [],
 
   checkAuth: async () => {
     try {
@@ -21,7 +21,6 @@ export const useAuthStore = create((set) => ({
     }
   },
 
-  // TODO: Implement gender using isMale and profile photo during signup
   signup: async (formData) => {
     set({ isSigningUp: true });
     try {

@@ -10,7 +10,7 @@ import {
   Mail,
   MessageSquare,
 } from "lucide-react";
-import AuthImagePattern from "../components/AuthImagePattern.jsx";
+import { AuthImagePattern } from "../components";
 
 function LoginPage() {
   const [showPass, setShowPass] = useState(false);
@@ -25,10 +25,11 @@ function LoginPage() {
     e.preventDefault();
     login(formData);
   };
+
   return (
-    <div className="h-screen grid md:grid-cols-2">
+    <div className="min-h-screen grid md:grid-cols-2">
       {/* Left Side */}
-      <div className="flex flex-col justify-center items-center p-6">
+      <div className="flex flex-col flex-1 justify-center items-center p-6">
         <div className="w-full max-w-md space-y-8">
           {/* Logo */}
           <div className="text-center mb-8">

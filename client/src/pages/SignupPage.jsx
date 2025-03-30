@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore.js";
-import AuthImagePattern from "../components/AuthImagePattern.jsx";
+import { AuthImagePattern } from "../components";
 
 // TODO: Profile photo can be added while signing up
 
@@ -41,7 +41,7 @@ function SignupPage() {
   return (
     <div className="min-h-screen grid md:grid-cols-2">
       {/* Left Side */}
-      <div className="flex flex-col justify-center items-center p-6">
+      <div className="flex flex-col flex-1 justify-center items-center p-6">
         <div className="w-full max-w-md space-y-8">
           {/* Logo */}
           <div className="text-center mb-8">
