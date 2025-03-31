@@ -1,7 +1,7 @@
-import HomePage from "./HomePage";
-import LoginPage from "./LoginPage";
-import ProfilePage from "./ProfilePage";
-import SettingsPage from "./SettingsPage";
-import SignupPage from "./SignupPage";
+import HomePage from "./HomePage.jsx";
+import LoginPage from "./LoginPage.jsx";
+import ProfilePage from "./ProfilePage.jsx";
+import SettingsPage from "./SettingsPage.jsx";
+import SignupPage from "./SignupPage.jsx";
 
 export { HomePage, LoginPage, ProfilePage, SettingsPage, SignupPage };

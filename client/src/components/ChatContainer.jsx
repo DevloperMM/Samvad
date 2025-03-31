@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
-import { useChatStore } from "../store/useChatStore";
+import { useChatStore } from "../store/useChatStore.js";
 import { MessageInput, ChatHeader } from "./";
-import MessageSkeleton from "./skeletons/MessageSkeleton";
-import { useAuthStore } from "../store/useAuthStore";
+import MessageSkeleton from "./skeletons/MessageSkeleton.jsx";
+import { useAuthStore } from "../store/useAuthStore.js";
 import { formatMessageTime } from "../lib/utils.js";
 
 function ChatContainer() {
