@@ -22,6 +22,20 @@ export const useChatStore = create((set, get) => ({
     }
   },
 
+  updateUsers: () => {
+    const socket = useAuthStore.getState().socket;
+
+    socket.off("newUser");
+    socket.on("newUser", (user) => {
+      const currUsers = get().users;
+      const isExist = currUsers.some((u) => u._id === user._id);
+
+      if (!isExist) {
+        set({ users: [...currUsers, user] });
+      }
+    });
+  },
+
   getMessages: async (userId) => {
     set({ isMessagesLoading: true });
     try {

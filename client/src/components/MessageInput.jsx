@@ -30,17 +30,13 @@ function MessageInput() {
     if (!text.trim() && !imagePreview) return;
 
     try {
-      await sendMessage({
-        text: text.trim(),
-        image: imagePreview,
-      });
+      sendMessage({ text: text.trim(), image: imagePreview });
 
       // Clear Form
       setText("");
       setImagePreview(null);
       if (fileInputRef.current) fileInputRef.current.value = "";
     } catch (err) {
-      console.log(err);
       console.log("Failed to send message: ", err);
     }
   };

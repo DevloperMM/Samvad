@@ -5,13 +5,20 @@ import { useAuthStore } from "../store/useAuthStore.js";
 import SidebarSkeleton from "./skeletons/SidebarSkeleton.jsx";
 
 function Sidebar() {
-  const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } =
-    useChatStore();
+  const {
+    getUsers,
+    updateUsers,
+    users,
+    selectedUser,
+    setSelectedUser,
+    isUsersLoading,
+  } = useChatStore();
 
   const { onlineUsers } = useAuthStore();
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
 
   useEffect(() => {
+    updateUsers();
     getUsers();
   }, [getUsers]);
 

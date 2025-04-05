@@ -2,6 +2,7 @@ import { asyncHandler, ApiError, generateToken } from "../lib/utils.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import cloudinary from "../lib/cloudinary.js";
+import { io } from "../lib/socket.js";
 
 export const signup = asyncHandler(async (req, res) => {
   const { fullName, email, password, isMale } = req.body;
@@ -26,11 +27,19 @@ export const signup = asyncHandler(async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashPass = await bcrypt.hash(password, salt);
 
-    const newUser = new User({ fullName, email, password: hashPass, isMale });
+    const newUser = new User({
+      fullName: fullName.trim(),
+      email: email.trim(),
+      password: hashPass,
+      isMale,
+    });
 
     if (newUser) {
       generateToken(newUser._id, res);
       await newUser.save();
+
+      // Realtime addition of new user in sidebar
+      io.emit("newUser", newUser);
 
       return res.status(201).json(newUser);
     } else {
