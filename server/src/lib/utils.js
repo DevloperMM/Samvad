@@ -34,6 +34,7 @@ export const generateToken = (userId, res) => {
   });
 
   res.cookie("token", token, {
+    cookies: true,
     maxAge: 7 * 24 * 60 * 60 * 1000,
     // prevent XSS attacks cross-site scripting attacks
     httpOnly: true,

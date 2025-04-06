@@ -6,6 +6,7 @@ import { useAuthStore } from "./useAuthStore.js";
 export const useChatStore = create((set, get) => ({
   messages: [],
   users: [],
+  isMessaging: false,
   selectedUser: null,
   isUsersLoading: false,
   isMessagesLoading: false,
@@ -49,6 +50,7 @@ export const useChatStore = create((set, get) => ({
   },
 
   sendMessage: async (msgData) => {
+    set({ isMessaging: true });
     const { selectedUser, messages } = get();
     try {
       const res = await axios.post(
@@ -58,6 +60,8 @@ export const useChatStore = create((set, get) => ({
       set({ messages: [...messages, res.data] });
     } catch (err) {
       toast.error(err.response.data.message);
+    } finally {
+      set({ isMessaging: false });
     }
   },
 

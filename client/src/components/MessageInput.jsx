@@ -1,12 +1,12 @@
 import React, { useRef, useState } from "react";
 import { useChatStore } from "../store/useChatStore.js";
-import { Image, Send, X } from "lucide-react";
+import { Image, Send, X, Loader2Icon } from "lucide-react";
 
 function MessageInput() {
   const [text, setText] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
-  const { sendMessage } = useChatStore();
+  const { sendMessage, isMessaging } = useChatStore();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -83,11 +83,11 @@ function MessageInput() {
           <button
             type="button"
             className={`hidden sm:flex btn btn-circle cursor-pointer ${
-              imagePreview ? "text-emerald-500" : "text-zinc-400"
+              imagePreview ? "text-emerald-500" : "text-zinc-600"
             }`}
             onClick={() => fileInputRef.current?.click()}
           >
-            <Image size={20} />
+            <Image size={22} />
           </button>
         </div>
 
@@ -97,7 +97,11 @@ function MessageInput() {
           className="btn btn-md btn-circle"
           disabled={!text.trim() && !imagePreview}
         >
-          <Send size={22} />
+          {!isMessaging ? (
+            <Send size={22} />
+          ) : (
+            <Loader2Icon className="animate-spin" size={22} />
+          )}
         </button>
       </form>
     </div>
